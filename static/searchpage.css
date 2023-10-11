@@ -1,0 +1,189 @@
+*{ box-sizing:border-box; }
+a{
+    text-decoration: none;
+    color: #888;
+}
+a:hover{
+    text-decoration:underline;
+}
+
+header{
+    min-height:200px;
+    /* height: 20%; */
+    /* background-color: #616161; */
+}
+
+
+body{
+    min-width: 1000px; 
+    /* 윈도우 창을 줄였을 때 최소 창 크기 */
+    /* background-color: beige; */
+    margin: 0; /*body의 기본 마진 없애기*/
+}
+header{
+    /* background-color: red;
+    font-size: 15px;
+    text-align: right;
+    margin-right: 10px; */
+}
+main{
+    min-height: 300px;
+    /* background-color: black; */
+    width: 100%;
+    /* margin:auto; */
+    display: flex;
+    /* align-items: center; */
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+    margin-bottom: 10%;
+}
+.service-search {
+    width: 45%;
+    /* margin-left:27.5%; */
+    /* background-color: cadetblue; */
+    margin: auto;
+}
+.service-search > a> h1{
+    font-size: 65px;
+    text-align: center;
+    /* background-color: red; */
+    /* margin-top: -1%; */
+}
+.searchbox{
+    margin-top: -1%;
+    /* background-color: blue; */
+    height: 70px;
+    display: flex;
+    border-radius: 10px;
+    border: 1px #888 solid;
+    margin-bottom: 1%;
+}
+#input{
+    font-size: 18px;
+    width:90%;
+    height: 60px;
+    margin: auto;
+    margin-left: 0.5%;  
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px #888 solid;
+    padding-left: 10px;
+}
+#submit{
+    width:9%;
+    height:60px;
+    margin:auto;
+    margin-right: 0.5%;  
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* background-color: #efefef; */
+    /* border: 1px #888 solid; */
+    min-width:50px;
+    padding:0;
+
+}
+
+
+@media screen and (min-width: 1350px) {
+    /* 창이 클 때 */
+    nav{
+        margin-bottom: 10px;
+        margin-top: 10px;
+        /* background-color:blue; */
+        list-style: none;
+        width:80%;
+        min-width: 600px;
+        color:black;
+        font-size: 15px;
+        display: flex;
+        text-align: center; 
+        justify-content: space-between;
+        margin: auto;
+    }
+    ul { padding: 0; 
+        min-width:200px;
+        display: inline-block;
+        /* margin:auto; */
+    }
+}
+
+@media screen and (max-width: 1350px){
+    /* 창이 작을 때, */
+    nav{ 
+        margin-bottom: 1%;
+        margin-top: 10px;
+        /* background-color:blue; */
+        list-style: none;
+        width:60%;
+        /* height:100%; */
+        color:black;
+        float:left;
+        font-size: 15px;
+        /* display: flex; */
+        margin-left: 20%;
+    }
+    ul { padding: 0; 
+        width:auto;
+    }
+}
+
+/* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  width: 600px;
+}
+
+.custom-select select {
+  /* display: none; hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: rgb(224, 0, 0);
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #eb0f0f transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #f50c0c;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: rgb(255, 4, 4);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(208, 21, 21, 0.1);
+}

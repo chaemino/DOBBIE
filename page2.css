@@ -1,0 +1,318 @@
+*{ box-sizing:border-box; }
+a{
+    text-decoration: none;
+    color: #888;
+}
+a:hover{
+    text-decoration:underline;
+}
+
+/* fieldset {
+    border: none; 
+} */
+
+body{
+    margin: 0; /*body의 기본 마진 없애기*/
+}
+
+header{ /*body 내의 header*/
+    /* background-color:darkred; */
+    /* margin: 100px 0px 0px 100px; */
+    margin: auto;
+    margin-top: 3%;
+    width: 35%;
+}
+h1{
+    font-size: 50px;
+    color:#888;
+    /* background-color:black; */
+    text-align:center;
+}
+.searchbar{
+    border: 2px solid #888;
+    width: 100%;
+	height: 45px;
+	display: flex;
+    background-color:transparent;
+    border-radius:25px;
+    margin-top: -15px;
+    /* background-color: red;; */
+}
+.searchbar input{
+   width: 83%;
+   margin-left: 25px;
+    border:0;
+}
+.searchbar button{
+  border:0; outline:0; /*기본적으로 있는 옵션인 입체감 제거*/
+  width:15%; 
+  border-left: 1px solid #d2d3d5;
+  background-color:transparent;
+  border-top-right-radius:25px;
+ border-bottom-right-radius:25px;
+}
+.searchbar button:hover{
+  background-color: lightgray;
+}
+
+
+/*------------------------------------------------------*/
+aside{
+    margin-left:7%;
+    margin-top: 3%;
+    /* margin: 50px 0px 0px 100px;  */
+    /* top right bottom left */
+    background-color: gray;
+    list-style: none;/*목록 점 없앰*/
+    width:240px;
+    height:100%;
+    color:black;
+    float:left;
+    font-size: 18px;
+}
+ul { padding: 0; }
+li {
+    list-style: none;
+    line-height: 34px;
+}
+a {
+    display: block; /* 중요 */
+    text-decoration: none;
+    color: #616161;
+    padding-left: 2px;
+    /* text-align: center; */
+}
+.snd_menu { background: #efefef; }
+.sub_menu { display: none; } /* 서브메뉴들 숨김 */
+.selec { background: #888; color: #efefef; }
+/* }
+ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+  margin-left:10px;
+}
+li {
+margin: 10px 0px 0px 0px;
+    padding: 0 0 0 0;
+    border : 0;
+}
+.sortingmethod{
+ width: 100%;
+  margin-left:0;
+  /* background-color:black; */
+  /* color: dimgrey;
+  font-size:17px;
+  display: block;
+  font-weight:bold;
+  margin-left: -3%;/*하ㄹ까 말까...................................*/
+/* }
+.sortingmethod > h4{
+  text-align: left;
+}
+.sortingmethod:hover{
+  text-decoration: underline;
+  color: black;
+} */ 
+
+
+
+/*------------------------------------------------------*/
+main{
+    /* background-color: aliceblue; */
+    /* min-height: 1500px; main내부의 항목들이 적어도 최소 높이를 유지 */
+    overflow: hidden;
+    height:auto;
+    margin-right: 7%;
+    margin-top: 3%;
+    padding-left: 2%;    
+}
+.keyword-papers{
+    /* background-color: rgb(250, 238, 224); */
+}
+.keyword-paper{
+    margin-bottom: 2.5%;
+    overflow: hidden;
+    height:auto;
+    /* border:black 5px solid; */
+    /* background-color: beige; */
+}
+.keyword-paper > h4{
+    margin-top: 0px;
+    font-size: 25px;
+    /* background-color: rgb(168, 186, 191); */
+    overflow: hidden;
+    height:auto;
+    width:60%
+}
+.keypaper-info{
+    width:50%;
+    margin-top: -40px;
+    /* background-color: rgb(229, 229, 229); */
+    height: auto;
+    text-align: right;
+    justify-content: space-between;
+}
+.item{
+    display:inline-block;
+    /* background-color: green; */
+    /* border-bottom: 5px grid darkgreen; */
+    padding-inline: 15px;
+}
+
+
+
+
+
+/*------------------------------------------------------*/
+.citations{
+    padding-top: 0.5%;
+    overflow: hidden;
+    height:auto;
+    /* background-color: rgb(155, 155, 155); */
+    padding-bottom: 3%;
+}
+input[type="checkbox"] {
+    width: 2%;
+    zoom:1.5; 
+    margin:auto;
+    accent-color:lightgray;
+    margin-right: 1%;
+}
+.citation-paper{
+    display: flex;
+    /* background-color: lightpink; */
+    overflow: hidden;
+    height:auto;
+    margin-bottom: 1%;
+}
+.citation-box{ /*div*/
+    /* background-color:rgb(54, 54, 85); */
+    width:65%;
+    /* display:flex; */
+    border: 1px solid black;
+    border-radius:10px;
+    overflow: hidden;
+    height:auto;
+    min-height: 100px;;
+}
+.citation{
+    font-size: 20px;
+    margin:auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    /* background-color:aqua; */
+    width: 98%;
+}
+.citation-paper-info{
+    /* margin-left: auto; flex의 자식에서 marginleft auto를 쓰면 우측 자식이 우측 정렬됨 */
+    /* position: relative;  display: inline-block; 이게 있어야 hidden요소가 이 내부 크기에 맞음 */
+    /* background-color: rgb(132, 64, 64); */
+    width:35%;
+    margin: auto;
+}
+.citation-paper-info >button >a{
+    color:black;
+    display:flex;
+}
+a:hover{
+    text-decoration:none;
+}
+.citation-paper-info > button{
+    margin-left:5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: rgb(169, 169, 169) solid 2px;
+    color:rgb(0, 0, 0);
+    background-color: transparent;
+    /* background-color: rgb(232, 232, 232); */
+    font-size: 15px;
+    width:40px;
+    height: 40px;
+    border-radius: 0px;
+    display:flex;
+    text-align: center;
+    justify-content: space-between;
+}
+.citation-paper-info > p {
+  display: none;
+  position: absolute;
+  width:20%;
+  padding: 8px;
+    margin-left: auto; 
+    overflow: hidden;
+    height:auto;
+  /* left: 0; */
+  /* -webkit-border-radius: 8px; */
+  /* -moz-border-radius: 8px;   */
+  border-radius: 8px;
+  /* background: #333;
+  color:white; */
+  background: rgb(128, 134, 161);
+  color:black;
+  font-size: 14px;
+  /* margin-top: -50px; */
+  margin-left: 5%;
+}
+
+.arrow_box:after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  border: solid transparent;
+  border-color: rgba(51, 51, 51, 0);
+  border-bottom-color: #333;
+  border-width: 10px;
+  /* pointer-events: none; */
+  /* content: " ";  화살표 옵션*/
+}
+button:hover + p.arrow_box {
+  display: block;
+}
+
+
+
+
+/*right side, always, top and export button*/
+.rightside{
+    width: 70px;
+    height: 150px;
+    position: fixed;
+    /* background-color: black; */
+    bottom:8%;
+    left:90%;
+    /* background-color: #ffffff; */
+    align-items: center;
+}
+#export { 
+    margin:auto;
+    margin-top:0px;
+    width: 66px;
+    height:66px;
+    border-radius: 80%;
+    background-color: #ffffff;
+    border: rgb(101, 101, 101)  2px solid;
+    position: fixed;
+    z-index: 2;
+    text-align: center;
+}
+#top{
+    margin:auto;
+    margin-top:100px;
+    margin-left: 10px;
+    width: 46px;
+    height: 46px;
+    border-radius: 80%;
+    background-color: #ffffff;
+    border:rgb(137, 137, 137) 2px dotted;
+    position: fixed;
+    z-index: 2;
+    text-align: center;
+} 
+/* #popupprogress{
+    display: none;
+} */
+/* 간단한 건 flex, 복잡한 레이아웃은 grid, position속성 필요시 사용 */  */

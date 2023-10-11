@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link rel="icon" href="https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fc%2Fc2%2FLetter_a.svg%2F640px-Letter_a.svg.png&imgrefurl=https%3A%2F%2Fko.wiktionary.org%2Fwiki%2Fa&tbnid=iZ9IWdA6q1y7oM&vet=12ahUKEwj6xfr5hKb9AhXWPXAKHV7-A_oQMygAegUIARCLAQ..i&docid=cxasFYvfWlEPjM&w=640&h=1314&q=a&ved=2ahUKEwj6xfr5hKb9AhXWPXAKHV7-A_oQMygAegUIARCLAQ" type="image/x-icon">
+    <!--style-->
+    <link rel="stylesheet" href="{{url_for('static', filename='searchpage.css')}}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+
+
+
+<body>
+    <header> 
+    </header> 
+    <main>
+
+      <div class="service-search">
+        <a href> <h1>Service Name</h1> </a>
+        
+        <form action="/citations/mainpage" method='get'>
+          <div class="searchbox">
+            <input id="input" type="text"  placeholder="type to search (ex. sentence classifiacation)">
+            <button id="submit" value="search" >search</button>
+          </div>
+          <div class="custom-select">
+            <select name ="sortingmethod" id ="sortingmethod">
+              <option value="">SORT BY</option>
+              <option value="Latest">Latest</option>
+              <option value="Number of citations">Number of citations</option>
+            </select>
+            
+            <select name ="fieldsOfStudy" id="fieldsOfStudy">
+              <option value="">FIELDS OF STUDY</option>
+              <option value="Agricultural and Food Sciences">Agricultural and Food Sciences</option>
+              <option value="Art">Art</option>
+              <option value="Biology">Biology</option>
+              <option value="Business">Business</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Economics">Economics</option>
+              <option value="Education">Education</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Environmental Science">Environmental Science</option>
+              <option value="Geography">Geography</option>
+              <option value="Geology">Geology</option>
+              <option value="History">History</option>
+              <option value="Law">Law</option>
+              <option value="Linguistics">Linguistics</option>
+              <option value="Materials Science">Materials Science</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Philosophy">Philosophy</option>
+              <option value="Physics">Physics</option>
+              <option value="Political Science">Political Science</option>
+              <option value="Psychology">Psychology</option>
+              <option value="Sociology">Sociology</option>
+            </select>
+            
+            <select name ="dateRange" id="dateRange">
+              <option value="">DATE RANGE</option>
+              <option value="This year">This year</option>
+              <option value="Last 5 years">Last 5 years</option>
+              <option value="Last 10 years">Last 10 years</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <script>
+
+        function submit_(){
+          var inputs = $('#input').val();
+          var sort = $('select[id = "sortingmethod"]').val();
+          var field = $('select[id = "fieldsOfStudy"]').val();
+          var date = $('select[id = "dateRange"]').val();
+          window.location.href = '/citations/mainpage?keywords='+inputs+'&sort='+sort+'&field='+field+'&date='+date; 
+        }
+
+        $("#input").keydown(function(e){ //input박스에서 enter시, submit되도록 함
+          if(event.keyCode === 13) {
+            submit_();
+          }
+        });
+        
+        $('#submit').click(function(e){ //button 클릭 시, submit
+          e.preventDefault();
+          submit_();
+        });
+
+          
+      </script>
+      </div>
+
+    </main>
+        
+</body>
+</html>

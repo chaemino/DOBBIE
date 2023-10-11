@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mainpage</title>
+    <!--style-->
+    <link rel="icon" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nationalgeographic.com%2Fanimals%2Fmammals%2Ffacts%2Fdomestic-dog&psig=AOvVaw0to-z_IW3T6bdVHXXt_8zc&ust=1677144101812000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNiTuuXmqP0CFQAAAAAdAAAAABAD" type="image/x-icon">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='mainpage.css')}}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- <script src="https://unpkg.com/bibtex-js-parser/umd/bibtex-js-parser.js"></script> for using bibtex parser library -->
+    <script src="https://unpkg.com/bibtex-js-parser/umd/bibtex-js-parser.js"></script>
+
+
+</head>
+<body>
+    <header> 
+        <a href="file:///Users/seongeun/vscode/capd/test.html"> <h1>A Piece of Paper</h1> </a>
+        <div class ="searchbar"> 
+            <input id="input" placeholder="type to research">
+            <button id="submit">search</button>
+        </div>
+    </header>
+
+    <!--메인페이지에서의 카테고리 선택 후 검색-->
+    <!--menu js--> 
+    <aside class="side">
+        <ul id="main_menu">
+            <li><a href="#" id="sort">SORT BY</a>
+                <ul class="snd_menu sub_menu">
+                    <li><a href="#" >Latest</a></li>
+                    <li><a href="#" >Number of citations</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="main_menu">
+            <li><a href="#" id="fieldsOfStudy">FIELDS OF STUDY</a>
+                <ul class="snd_menu sub_menu">
+                    <li><a href="#"  >Agricultural and Food Sciences</a></li>
+                    <li><a href="#"  >Art</a></li>
+                    <li><a href="#"  >Biology</a></li>
+                    <li><a href="#"  >Business</a></li>
+                    <li><a href="#"  >Computer Science</a></li>
+                    <li><a href="#"  >Chemistry</a></li>
+                    <li><a href="#"  >Economics</a></li>
+                    <li><a href="#"  >Education</a></li>
+                    <li><a href="#"  >Engineering</a></li>
+                    <li><a href="#"  >Environmental Science</a></li>
+                    <li><a href="#"  >Geography</a></li>
+                    <li><a href="#"  >Geology</a></li>
+                    <li><a href="#"  >History</a></li>
+                    <li><a href="#"  >Law</a></li>
+                    <li><a href="#"  >Linguistics</a></li>
+                    <li><a href="#"  > Materials Science</a></li>
+                    <li><a href="#"  >Mathematics</a></li>
+                    <li><a href="#"  >Medicine</a></li>
+                    <li><a href="#"  >Philosophy</a></li>
+                    <li><a href="#"  >Physics</a></li>
+                    <li><a href="#"  >Political Science</a></li>
+                    <li><a href="#"  >Psychology</a></li>
+                    <li><a href="#"  >Sociology</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="main_menu">
+            <li><a href="#" id="dateRange">DATE RANGE</a>
+                <ul class="snd_menu sub_menu">
+                    <li><a href="#"  >This year</a></li>
+                    <li><a href="#"  >Last 5 years</a></li>
+                    <li><a href="#"  >Last 10 years</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    
+    <script> //menu js , search and menu 
+        //menu js
+        $(document).ready(function(){
+            // $('.snd_menu').click(function(){
+            //     console.log($(this).text());
+            // });
+            $('#main_menu > li > a').click(function(){
+                $(this).next($('.snd_menu')).slideToggle('fast');
+            });
+            // 버튼 클릭 시 색 변경
+            $('li > a').focus(function(){
+              $(this).addClass('selec');
+            })
+            $("li > a").blur(function(){
+              $(this).removeClass('selec');
+            })
+            
+        });
+
+        function submit_(){ 
+            var inputs = $('#input').val();
+            $('.snd_menu > li > a').click(function(){
+            // console.log($(this).text()); //클릭된 sub메뉴 확인
+            // console.log($(this).parents("#main_menu").children('li').children('a').attr('id')); sort인지 field인지 date인지 확인
+                var menu_id=$(this).parents("#main_menu").children('li').children('a').attr('id');
+                if(menu_id =="sort"){
+                    sort = $(this).text();
+                }else if(menu_id =="fieldsOfStudy"){
+                    field= $(this).text();
+                }else if(menu_id == "dateRange"){
+                    date = $(this).text();
+                }
+            });
+            window.location.href = '/citations/mainpage?keywords='+inputs+'&sort='+sort+'&field='+field+'&date='+date; 
+        }
+
+
+        $("#input").keydown(function(e){ //input박스에서 enter시, submit되도록 함
+          if(event.keyCode === 13) {
+            submit_();
+          }
+        });//이게 input내에서 모든 key가 눌릴 때 중에 enter일 때...... ... 이러면 나머지는 정상동작하나? 오류있을지도
+
+        //searching and selecting categories in mainpage
+        var sort, field, date;
+        $('#submit').click(function(e){
+            e.preventDefault();
+            submit_();
+        });
+
+    </script> 
+
+    <script>
+        // window.addEventListener('scroll', () => { 
+            //스크롤을 할 때마다 로그로 현재 스크롤의 위치가 찍혀나온다. // console.log(window.scrollX, window.scrollY);
+        // });
+    </script> 
+
+    <!-- document ready -->
+    <script>
+        var dataFromServer;
+        var title_bibtex_matchdic ={};
+        $(document).ready(function(){
+            var keywords = "{{keywords}}" //url 매개변수로 있는 것에서 dictionary key값을 통해 데이터를 받음
+            var sort = "{{sortingmethod}}"
+            var fields = "{{fieldsOfStudy}}"
+            var date = "{{dateRange}}"
+
+            $.ajax({ //서버로 보내는 것
+            type: "POST",
+            url:'/citations/mainpage',
+            data: JSON.stringify({"keywords":keywords, 'sortingmethod':sort, "fieldsOfStudy":fields, "dateRange":date }),
+            dataType: 'JSON',
+            contentType:"application/json",
+            async : false,
+            success: function(result){
+                console.log('success');
+                // console.log(result.result.result);
+                dataFromServer = result.result.result;
+                var len = dataFromServer.length; //몇개의 keypaper가 있는지
+                var number_of_citation= [];//각각 몇개의 citations들이 있는지 num저장 list
+
+//태그 생성은 citation처럼 아예 만들어도 되고 keyword처럼 만들어진 걸 clone해도 되고,,
+                for(let i=0;i<len;i++){ // 태그 반복 생성, 첫 태그 무더기를 넣어두고 clone함
+                    number_of_citation.push(dataFromServer[i].citations.length);
+                    var title=""+dataFromServer[i].title;
+                    var year=""+dataFromServer[i].year;
+                    var bibtex=""+dataFromServer[i].bibtex;
+                    var author=""+dataFromServer[i].author;
+                    var pdfurl =dataFromServer[i].pdf_url;
+
+                    var paper_article = document.createElement('article');
+                    var str = "<article class='keyword-paper'> <h4 class='title'>"+title+"</h4> <div class='keypaper-info'> <span class='author'>"+author+"</span> <span class='year'>"+year+"</span> <button class='item'><a id ='pdfurl' href='"+pdfurl+"'>pdf</a></button> <button class='item' onclick='"+bibtex_copy()+"' id='cite'>cite</button> </div></article>";//citation의 정보로 넣어야......bibtex...
+                    paper_article.innerHTML = str;
+                    document.getElementById('keyword-papers').appendChild(paper_article);//citation-paper태그 생성
+                    // if (i<len-1){
+                        // $('.keyword-paper:first').clone().appendTo('#keyword-papers');//:first -> 없으면, 반복문 한번 돌고 나서 2개가 된 keypaper clone, 4개가 된 keypaper clone,,,일케 됨        
+                    // }
+                }
+
+                const citations_sum = number_of_citation.reduce((a,b) => (a+b));
+                $('.keyword-paper').each(function(i, e){
+                    if(number_of_citation[i]!=0){
+                        for (let num =0;num<number_of_citation[i];num++){ 
+                            var article_ = document.createElement('article');
+                            var tmp=dataFromServer[i].citations[num];
+                            // console.log(dataFromServer[i].citations[num].citing_paper_id); citation 논문의 info url을 위한 id 확인
+                            var info_link = "https://www.semanticscholar.org/paper/"+dataFromServer[i].citations[num].citing_paper_id;
+                            var str = "<article class='citation-paper'> <div class='citation-box'><input type='checkbox' id ='chk'> <label for ='chk' class='citation'>"+tmp.citation+" </label><a href="+ info_link +"> info </a></div> </article>";
+                            article_.innerHTML = str;
+                            e.appendChild(article_);//citation-paper태그 생성
+                        }
+                        //expand box 생성(추가)
+//여기 숫자를 기본 인용문 개수로 변경해야 .. 현재는 2.. 수정하면 5로...                        
+                        if(number_of_citation[i]>=2){
+                            var expandbox = document.createElement('div');
+                            var str = '<div id = "ex" class="expandbox"> <button> expand </button></div>';
+                            // var str = '<div id = "ex" class="expandbox"> <a href="javascript:expand;" class="btn"> expand </a></div>';
+                            expandbox.innerHTML = str;
+                            e. appendChild(expandbox);
+                        }
+                        
+                    }
+                    else{
+                        e.append("there is no citation");
+//이부분 css적용하려면 div로 넣어야 할 듯?
+                    }
+                    var tmpp= dataFromServer[i].bibtex;//각 논문의 bibtex
+                    title_bibtex_matchdic[dataFromServer[i].title] = tmpp ;
+                });
+                // var cnt=0;
+                // var list_key =[".title", ".author", ".year"];
+                // for (const element of list_key){
+                //     $(element).each(function(i,e){// .title, .author, .year의 각각을 돌며
+                //         var apnd = dataFromServer[i][element.replace(".","")];
+                //         $(e).append(apnd);//append함
+                //     });
+                // }
+            },error:function(xhr, status, error){
+                console.log('xhr',xhr);
+                console.log('error',error); 
+                console.log('status',status);
+            }
+            });
+        });
+    </script>    
+
+    <script>//expand __________ bibtex copy
+
+        //expand
+        $(function(){
+            $(".keyword-paper").each(function(){
+                // console.log($(this).children().find(".citation-paper")); //동일 -> console.log($(this).children("article"));
+                // var temp = $(this).children().find("article");
+                $(this).children().find(".citation-paper").slice(0, 2).show(); // 초기갯수
+                $(this).children().find("#ex").click(function(e){ // 클릭시 more
+                    e.preventDefault();
+                    // console.log("clicked");
+                    // console.log($(this).parents(".keyword-paper"));//여기서 this는 expandbox가 됨. parents만 두면 keyword-papers를 가리키고, 내부에 "paper"로 지정해줘야 함.
+                    // console.log($(this).parents().children().find(".citation-paper:hidden")); // 부모(keypaper)의 자식인 citation-paper들 중 hidden된 것들을 찾음
+                    $(this).parents(".keyword-paper").children().find(".citation-paper:hidden").slice(0, 2).show(); // 클릭시 more 갯수 지저정
+                    if($(this).parents(".keyword-paper").children().find(".citation-paper:hidden").length == 0){ // 컨텐츠 남아있는지 확인
+                        console.log("no more"); // 컨텐츠 없을시 log찍기
+                        $(this).hide();//expand box 없애기
+                    }
+                });
+            });
+        });
+
+//copy bibtex
+
+    // $('#cite').click(function() {
+    //     console.log("hi");
+    //     // copyToClipboard('https://manition.tistory.com/');
+    //     // alert('주소를 복사하였습니다');
+    // });
+        function bibtex_copy(){
+            // window.prompt("hi");
+        }
+    
+    </script>
+        
+
+
+    <main>
+        <article id="keyword-papers">
+            <!--논문-->
+            <!-- <article class="keyword-paper"> 
+                <h4 class="title"></h4> 
+                <div class = "keypaper-info"> 
+                    <span class="author"></span>
+                    <span class = "year"></span>
+                    <button  class="item"><a id ="pdfurl" href="">pdf</a></button>
+                    <button class="item" >cite</button>
+                </div> -->
+
+                <!-- <article class="citation-paper"> -->
+                    <!-- <input type="checkbox" id ="chk"> -->
+                    <!-- <label for ="chk" class="citation"> </label> -->
+                        <!-- <button><a href="https://aclanthology.org/N19-1423.pdf">paper's info</a></button> -->
+                <!-- </article> -->
+
+                <!--expand box -->
+                <!-- <div id = "ex" class="expandbox">
+                    <button> expand </button>
+                </div>  -->
+            <!-- </article> -->
+    
+        </article>
+     
+        <script> //top and export
+        //top
+            function clickme() {
+                window.scrollTo({top:0, left:0, behavior:'smooth'});
+            }
+
+        //export
+            var export_val=""; //동일 keypaper의 note는 계속 추가되어야 하므로.. 
+            const writeToTextFile = () => {//export버튼을 눌렀을 때, 선택된 것들을 확인해야 하므로 함수 내부에서 처리
+                var titles_toCheckDuplicate=[]; //동일한 keypaper의 note이면 추가된 것에 추가해야 하므로 동일 keypaper의 인용문인지 확인하기 위함
+                var tmpdic={};
+                const numchecked =$('input:checkbox:checked').length;
+
+                $("input:checkbox:checked").each(function() { //function
+                    var note_form = ',\n  note={'+$(this).next('label').text()+'}\n}';
+                    // console.log(note_form);
+                    var titletemp=$(this).parents("article>article").find("h4").text();//checked인 keypapertitle 확인
+                    var bibtextemp = title_bibtex_matchdic[titletemp];//해당 title 논문의 bibtex가져오기
+                    if(titles_toCheckDuplicate.some((item) => item == titletemp)){ //중복될 때 true
+                        console.log('here');
+                        tmpdic[titletemp] = tmpdic[titletemp].slice(0,-2) +note_form;
+                    }else{//처음에 들어감
+                        titles_toCheckDuplicate.push(titletemp);//title추가
+                        bibtextemp = bibtextemp.slice(0,-2)+ note_form; //마지막 문자인 }제거 후 note} 붙이기
+                        // console.log(bibtextemp);
+                        tmpdic[$(this).parents("article>article").find("h4").text()]= bibtextemp;
+                    }
+                });
+
+                for(var k in tmpdic){ //making txt content
+                    export_val= export_val + tmpdic[k]+"\n";
+                }
+                
+                //file write
+                let textFile = null;
+                const makeTextFile = () => {
+                    const data = new Blob([export_val], {
+                        type: 'text/plain',
+                    });
+                    if (textFile !== null) {
+                        window.URL.revokeObjectURL(textFile);
+                    }
+                    textFile = window.URL.createObjectURL(data);
+                    return textFile;
+                };
+                const link = document.createElement('a');
+                link.setAttribute('download', 'bibtex_with_note.txt');
+                link.href = makeTextFile(export_val);
+                link.click();
+            };
+            
+        </script>
+            
+        <div class="rightside">
+            <input id="export" type="button" value="EXPORT" onclick="writeToTextFile()"> 
+            <input id="top" type="button" value="TOP" onclick="clickme()">
+        </div>
+
+    <script>
+//10개씩 스크롤 
+        // window.addEventListener("scroll", (e) => {
+        //     const isScrollEnd = window.innerHeight + window.scrollY > document.body.offsetHeight;
+        //     //innerheight: 화면의 세로 길이,   window.scrolly:스크롤을 얼마나 내렸는가 , body.offsetheight: 바디의 높이 
+        //     console.log()
+        //     $.ajax({ //서버로 보내는 거..
+        //         type: "GET",
+        //         url:'/topost',
+        //         // data: JSON.stringify({"keywords":keywords, 'sortingmethod':sort, "fieldsOfStudy":fields, "dateRange":date }),
+        //         // dataType: 'JSON',
+        //         // contentType:"application/json",
+        //         // async : false,
+        //         success: function(result){
+        //             console.log('success');
+        //             console.log(result);
+        //             dataFromServer = result.result.result;
+        //             console.log(dataFromServer[0].citations.length); //[0]를 없애야 
+        //             var len = dataFromServer[0].citations.length;
+        //             var first_keypaper = document.getElementsByClassName('keyword-paper')[0];
+        //             if(len!=0){
+        //                 for (let num =0;num<len;num++){ 
+        //                     var article_ = document.createElement('article');
+        //                     var tmp=dataFromServer[0].citations[num];
+        //                     var str = "<article class='citation-paper'> <input type='checkbox' id ='chk'> <label for ='chk' class='citation'>"+tmp.citation+" </label> <button> <a href='https://aclanthology.org/N19-1423.pdf'>paper's info</a></button> </article>";
+        //                     article_.innerHTML = str;
+        //                     first_keypaper.appendChild(article_);//citation-paper태그 생성
+        //                 }
+        //             }else{
+        //                 first_keypaper.append("there is no citation");
+        //             }
+        //             // var tmpp= dataFromServer[i].bibtex;//각 논문의 bibtex
+        //         }
+        //     });    
+        //             // title_bibtex_matchdic[dataFromServer[i].title] = tmpp ;
+        //         // for (let i = 0; i < 1; i++) {
+        //         //     const $newBox = document.createElement("div");
+        //         //     $newBox.className = "box";
+        //         //     $newBox.textContent = ++count;
+        //         //     document.querySelector("#keyword-papers").appendChild($newBox);
+        //         // }
+        // });
+    </script>
+
+    </main>
+
+    <footer>
+        <!-- <p>about us</p>
+        <p>contect: tjddms5311@naver.com</p> -->
+    </footer>
+   
+</body>
+
+</html>
